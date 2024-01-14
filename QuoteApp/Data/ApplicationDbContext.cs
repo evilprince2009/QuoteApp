@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using QuoteApp.Models;
 
 namespace QuoteApp.Data
 {
@@ -9,5 +10,6 @@ namespace QuoteApp.Data
             : base(options)
         {
         }
+        public DbSet<QuoteApp.Models.Quote> Quote { get; set; } = default!;
     }
 }
