@@ -20,6 +20,18 @@ namespace QuoteApp.Controllers
             return View(await _context.Quote.ToListAsync());
         }
 
+
+        // GET: ShowSearchForm
+        public IActionResult ShowSearchForm()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> ShowSearchResults(string SearchTerm)
+        {
+            return View("Index", await _context.Quote.Where(q => q.Quotation.Contains(SearchTerm)).ToListAsync());
+        }
+
         // GET: Quotes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
