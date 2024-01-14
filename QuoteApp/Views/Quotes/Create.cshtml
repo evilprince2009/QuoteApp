@@ -1,12 +1,12 @@
 ﻿@model QuoteApp.Models.Quote
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create a new Quote";
 }
 
-<h1>Create</h1>
 
-<h4>Quote</h4>
+
+<h4>Add a Quote</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,26 +16,23 @@
                 <label asp-for="Quotation" class="control-label"></label>
                 <input asp-for="Quotation" class="form-control" />
                 <span asp-validation-for="Quotation" class="text-danger"></span>
-            </div>
+            </div><br>
             <div class="form-group">
                 <label asp-for="Author" class="control-label"></label>
                 <input asp-for="Author" class="form-control" />
                 <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
+            </div><br>
             <div class="form-group">
                 <label asp-for="Genre" class="control-label"></label>
                 <input asp-for="Genre" class="form-control" />
                 <span asp-validation-for="Genre" class="text-danger"></span>
-            </div>
+            </div><br>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" asp-action="Index" value="Back to List" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

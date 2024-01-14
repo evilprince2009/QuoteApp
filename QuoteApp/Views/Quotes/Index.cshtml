@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<QuoteApp.Models.Quote>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Available Quote";
 }
 
-<h1>Index</h1>
+<h4>Here is a list of available Quotes</h4>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
+            <th>
+
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quotation)
             </th>
@@ -21,27 +22,43 @@
             <th>
                 @Html.DisplayNameFor(model => model.Genre)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
+
+
+        @{
+            int counter = 1;
+        }       
+
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quotation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    <tr>
+       <td>
+           @counter
+       </td>
+       <td>
+          @Html.DisplayFor(modelItem => item.Quotation)
+       </td>
+       <td>
+          @Html.DisplayFor(modelItem => item.Author)
+       </td>
+       <td>
+          @Html.DisplayFor(modelItem => item.Genre)
+       </td>
+       <td>
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+       </td>    
+    </tr>
+            counter++;
 }
     </tbody>
 </table>
+
+<br>
+<form asp-action="Create">
+    <input type="submit" value="Create New" class="btn btn-primary" />
+</form>
+
