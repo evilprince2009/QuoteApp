@@ -169,3 +169,5 @@ namespace QuoteApp.Controllers
         }
     }
 }
+
+// EOF
