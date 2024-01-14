@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuoteApp.Data;
 using QuoteApp.Models;
@@ -51,6 +52,7 @@ namespace QuoteApp.Controllers
         }
 
         // GET: Quotes/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -61,6 +63,7 @@ namespace QuoteApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Quotation,Author,Genre")] Quote quote)
         {
             if (ModelState.IsValid)
@@ -73,6 +76,7 @@ namespace QuoteApp.Controllers
         }
 
         // GET: Quotes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,6 +97,7 @@ namespace QuoteApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Quotation,Author,Genre")] Quote quote)
         {
             if (id != quote.Id)
@@ -124,6 +129,7 @@ namespace QuoteApp.Controllers
         }
 
         // GET: Quotes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,6 +150,7 @@ namespace QuoteApp.Controllers
         // POST: Quotes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var quote = await _context.Quote.FindAsync(id);
