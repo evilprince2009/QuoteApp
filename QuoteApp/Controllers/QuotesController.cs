@@ -18,7 +18,8 @@ namespace QuoteApp.Controllers
         // GET: Quotes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Quote.ToListAsync());
+            List<Quote> data = await _context.Quote.ToListAsync();
+            return View(data);
         }
 
 
@@ -30,7 +31,8 @@ namespace QuoteApp.Controllers
 
         public async Task<IActionResult> ShowSearchResults(string SearchTerm)
         {
-            return View("Index", await _context.Quote.Where(q => q.Quotation.Contains(SearchTerm)).ToListAsync());
+            List<Quote> selected_data = await _context.Quote.Where(q => q.Quotation.Contains(SearchTerm)).ToListAsync();
+            return View("Index", selected_data);
         }
 
         // GET: Quotes/Details/5
