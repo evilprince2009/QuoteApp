@@ -6,10 +6,11 @@ namespace QuoteApp.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public DbSet<Quote> Quote { get; set; }
+        public DbSet<DirtyQuotes> DirtyQuotes { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-        public DbSet<QuoteApp.Models.Quote> Quote { get; set; } = default!;
     }
 }

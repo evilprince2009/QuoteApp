@@ -11,7 +11,11 @@ namespace QuoteApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            string connection_string_key = "DefaultConnection";
+            var connectionString = builder.Configuration
+            .GetConnectionString(connection_string_key) ??
+            throw new InvalidOperationException($"Connection string '{connection_string_key}' not found.");
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -35,16 +39,12 @@ namespace QuoteApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Quotes}/{action=Index}/{id?}");
             app.MapRazorPages();
-
             app.Run();
         }
     }

@@ -1,1 +1,1 @@
-﻿window.addEventListener("resize", () => alert(`The window has been resized! Edit the "site.js" file to get rid of this disturbing alert.`));
+﻿
