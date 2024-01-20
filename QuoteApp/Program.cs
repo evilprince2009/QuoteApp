@@ -11,7 +11,7 @@ namespace QuoteApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            string connection_string_key = "DefaultConnection";
+            string connection_string_key = "SqlServer";
             var connectionString = builder.Configuration
             .GetConnectionString(connection_string_key) ??
             throw new InvalidOperationException($"Connection string '{connection_string_key}' not found.");

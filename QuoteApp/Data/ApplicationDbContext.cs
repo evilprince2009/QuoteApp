@@ -6,7 +6,8 @@ namespace QuoteApp.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<Quote> Quote { get; set; }
+        public DbSet<Quote> Quotes { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
