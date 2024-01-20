@@ -12,7 +12,7 @@ using QuoteApp.Data;
 namespace QuoteApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240120103313_AuthorAdded")]
+    [Migration("20240120104624_AuthorAdded")]
     partial class AuthorAdded
     {
         /// <inheritdoc />
@@ -245,7 +245,7 @@ namespace QuoteApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Author");
+                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("QuoteApp.Models.Quote", b =>
@@ -256,9 +256,6 @@ namespace QuoteApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Genre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -267,11 +264,14 @@ namespace QuoteApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("QuoteAuthorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("QuoteAuthorId");
 
-                    b.ToTable("Quote");
+                    b.ToTable("Quotes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -327,13 +327,13 @@ namespace QuoteApp.Data.Migrations
 
             modelBuilder.Entity("QuoteApp.Models.Quote", b =>
                 {
-                    b.HasOne("QuoteApp.Models.Author", "Author")
+                    b.HasOne("QuoteApp.Models.Author", "QuoteAuthor")
                         .WithMany()
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("QuoteAuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
+                    b.Navigation("QuoteAuthor");
                 });
 #pragma warning restore 612, 618
         }

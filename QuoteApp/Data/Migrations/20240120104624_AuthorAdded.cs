@@ -13,19 +13,32 @@ namespace QuoteApp.Data.Migrations
             migrationBuilder.DropTable(
                 name: "DirtyQuotes");
 
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_Quote",
+                table: "Quote");
+
             migrationBuilder.DropColumn(
                 name: "Author",
                 table: "Quote");
 
+            migrationBuilder.RenameTable(
+                name: "Quote",
+                newName: "Quotes");
+
             migrationBuilder.AddColumn<int>(
-                name: "AuthorId",
-                table: "Quote",
+                name: "QuoteAuthorId",
+                table: "Quotes",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
 
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_Quotes",
+                table: "Quotes",
+                column: "Id");
+
             migrationBuilder.CreateTable(
-                name: "Author",
+                name: "Authors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -35,19 +48,19 @@ namespace QuoteApp.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Author", x => x.Id);
+                    table.PrimaryKey("PK_Authors", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quote_AuthorId",
-                table: "Quote",
-                column: "AuthorId");
+                name: "IX_Quotes_QuoteAuthorId",
+                table: "Quotes",
+                column: "QuoteAuthorId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Quote_Author_AuthorId",
-                table: "Quote",
-                column: "AuthorId",
-                principalTable: "Author",
+                name: "FK_Quotes_Authors_QuoteAuthorId",
+                table: "Quotes",
+                column: "QuoteAuthorId",
+                principalTable: "Authors",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -56,19 +69,27 @@ namespace QuoteApp.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Quote_Author_AuthorId",
-                table: "Quote");
+                name: "FK_Quotes_Authors_QuoteAuthorId",
+                table: "Quotes");
 
             migrationBuilder.DropTable(
-                name: "Author");
+                name: "Authors");
+
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_Quotes",
+                table: "Quotes");
 
             migrationBuilder.DropIndex(
-                name: "IX_Quote_AuthorId",
-                table: "Quote");
+                name: "IX_Quotes_QuoteAuthorId",
+                table: "Quotes");
 
             migrationBuilder.DropColumn(
-                name: "AuthorId",
-                table: "Quote");
+                name: "QuoteAuthorId",
+                table: "Quotes");
+
+            migrationBuilder.RenameTable(
+                name: "Quotes",
+                newName: "Quote");
 
             migrationBuilder.AddColumn<string>(
                 name: "Author",
@@ -76,6 +97,11 @@ namespace QuoteApp.Data.Migrations
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_Quote",
+                table: "Quote",
+                column: "Id");
 
             migrationBuilder.CreateTable(
                 name: "DirtyQuotes",
